@@ -1,4 +1,4 @@
 source "https://rubygems.org"
-require 'slack-ruby-client'
-require 'nokogiri'
-require 'open-uri'
+gem 'slack-api'
+gem 'slack-ruby-client'
+gem 'nokogiri'
