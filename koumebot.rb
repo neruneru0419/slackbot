@@ -57,6 +57,7 @@ client.on :message do |data|
             client.message channel: data['channel'], text: "#{$hoge}\n#{$link}"
         else 
             client.message channel: data['channel'], text: "ニュースが見つかりませんでした"
+        end
         $hoge = " "
         $link = " "
     end
