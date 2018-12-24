@@ -38,9 +38,9 @@ client.on :message do |data|
                 $hoge = hoge.text
                 puts "-----#{$hoge}#{$hoge.class}-----"
                 if $hoge then
-                    flg = false
-                else
                     flg = true
+                else
+                    flg = false
                 end
                 $link = ("https://news.google.com" + hoge[:href])
                 $link.slice!("https://news.google.com".length)
