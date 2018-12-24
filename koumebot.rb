@@ -36,6 +36,11 @@ client.on :message do |data|
             sample.css('a').each do |hoge|
                 #puts hoge.text
                 $hoge = hoge.text
+                unless $hoge != " " then
+                    flg = false
+                else
+                    flg = true
+                end
                 $link = ("https://news.google.com" + hoge[:href])
                 $link.slice!("https://news.google.com".length)
                 count += 1
@@ -48,13 +53,14 @@ client.on :message do |data|
             end
         end
        
-        client.message channel: data['channel'], text: "#{$hoge}\n#{$link}"
+        if flg then
+            client.message channel: data['channel'], text: "#{$hoge}\n#{$link}"
+        else 
+            client.message channel: data['channel'], text: "ニュースが見つかりませんでした"
         $hoge = " "
         $link = " "
     end
-    if data['text'].include?('こんにちは')
-        client.message channel: data['channel'], text: "Hi!"
-    end
+    
     
 end
 
