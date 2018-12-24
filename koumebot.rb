@@ -17,7 +17,10 @@ end
 
 client.on :message do |data|
     puts data
-    if data['text'].include?('<@UEXQQH88M>')
+    if data['text'] = '<@UEXQQH88M>' then
+        client.message channel: data['channel'], text: "単語を入力してください"
+        
+    elsif data['text'].include?('<@UEXQQH88M>')
         data['text'].slice!('<@UEXQQH88M>')
         url = URI.encode "https://news.google.com/search?q=#{data['text']}&hl=ja&gl=JP&ceid=JP%3Aja"
         puts url
