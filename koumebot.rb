@@ -17,7 +17,7 @@ end
 
 client.on :message do |data|
     puts data
-    if data['text'] = '<@UEXQQH88M>' then
+    if data['text'] == '<@UEXQQH88M>' then
         client.message channel: data['channel'], text: "単語を入力してください"
         
     elsif data['text'].include?('<@UEXQQH88M>')
