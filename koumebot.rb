@@ -8,7 +8,9 @@ end
 
 # RTM Clientのインスタンス生成
 client = Slack::RealTime::Client.new
-flg = true
+$flg = true
+$hoge = nil
+$link = nil
 # slackに接続できたときの処理
 client.on :hello do
 puts 'connected!'
@@ -38,11 +40,7 @@ client.on :message do |data|
                 $hoge = hoge.text
                 $link = ("https://news.google.com" + hoge[:href])
                 $link.slice!("https://news.google.com".length)
-                if $link then
-                    flg = true
-                else
-                    flg = false
-                end
+                
                 
                 count += 1
                 if count == 1 then
@@ -53,8 +51,12 @@ client.on :message do |data|
                 break
             end
         end
-       
-        if flg then
+        if $link then
+            $flg = true
+        else
+            $flg = false
+        end
+        if $flg then
             client.message channel: data['channel'], text: "#{$hoge}\n#{$link}"
         else 
             client.message channel: data['channel'], text: "ニュースが見つかりませんでした"
