@@ -36,14 +36,14 @@ client.on :message do |data|
             sample.css('a').each do |hoge|
                 #puts hoge.text
                 $hoge = hoge.text
-                puts "-----#{$hoge}#{$hoge.class}-----"
-                if $hoge then
+                $link = ("https://news.google.com" + hoge[:href])
+                $link.slice!("https://news.google.com".length)
+                if $link then
                     flg = true
                 else
                     flg = false
                 end
-                $link = ("https://news.google.com" + hoge[:href])
-                $link.slice!("https://news.google.com".length)
+                
                 count += 1
                 if count == 1 then
                     break
@@ -59,8 +59,8 @@ client.on :message do |data|
         else 
             client.message channel: data['channel'], text: "ニュースが見つかりませんでした"
         end
-        $hoge = ""
-        $link = ""
+        $hoge = nil
+        $link = nil
     end
     
     
