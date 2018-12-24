@@ -49,6 +49,8 @@ client.on :message do |data|
         end
        
         client.message channel: data['channel'], text: "#{$hoge}\n#{$link}"
+        $hoge = " "
+        $link = " "
     end
     if data['text'].include?('こんにちは')
         client.message channel: data['channel'], text: "Hi!"
