@@ -37,7 +37,7 @@ client.on :message do |data|
                 #puts hoge.text
                 $hoge = hoge.text
                 puts "-----#{$hoge}#{$hoge.class}-----"
-                if $hoge.empty? then
+                if $hoge then
                     flg = false
                 else
                     flg = true
