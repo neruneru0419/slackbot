@@ -36,7 +36,7 @@ client.on :message do |data|
             sample.css('a').each do |hoge|
                 #puts hoge.text
                 $hoge = hoge.text
-                unless $hoge != " " then
+                if $hoge.empty? then
                     flg = false
                 else
                     flg = true
@@ -58,8 +58,8 @@ client.on :message do |data|
         else 
             client.message channel: data['channel'], text: "ニュースが見つかりませんでした"
         end
-        $hoge = " "
-        $link = " "
+        $hoge = ""
+        $link = ""
     end
     
     
