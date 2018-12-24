@@ -36,6 +36,7 @@ client.on :message do |data|
             sample.css('a').each do |hoge|
                 #puts hoge.text
                 $hoge = hoge.text
+                puts $hoge
                 if $hoge.empty? then
                     flg = false
                 else
