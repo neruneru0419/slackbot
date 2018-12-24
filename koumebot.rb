@@ -8,7 +8,7 @@ end
 
 # RTM Clientのインスタンス生成
 client = Slack::RealTime::Client.new
-
+flg = true
 # slackに接続できたときの処理
 client.on :hello do
 puts 'connected!'
