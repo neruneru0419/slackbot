@@ -1,71 +1,19 @@
 require 'slack-ruby-client'
-require 'nokogiri'
-require 'open-uri'
+require './atcoder'
 
 Slack.configure do |conf|
 conf.token = ENV['SLACK_API_TOKEN']
 end
-
-# RTM Clientのインスタンス生成
-client = Slack::RealTime::Client.new
-$flg = true
-$hoge = nil
-$link = nil
-# slackに接続できたときの処理
-client.on :hello do
-puts 'connected!'
-client.message channel: 'botテスト', text: 'connected!'
-end
-
-client.on :message do |data|
-    puts data
-    if data['text'] == '<@UEXQQH88M>' then
-        client.message channel: data['channel'], text: "単語を入力してください"
-        
-    elsif data['text'].include?('<@UEXQQH88M>')
-        data['text'].slice!('<@UEXQQH88M>')
-        url = URI.encode "https://news.google.com/search?q=#{data['text']}&hl=ja&gl=JP&ceid=JP%3Aja"
-        puts url
-        charset = nil
-        html = open(url) do |f|
-            charset = f.charset 
-            f.read 
-        end
-            
-        doc = Nokogiri::HTML.parse(html, nil, charset)
-        count = 0
-        doc.css('h3').each do |sample|
-            sample.css('a').each do |hoge|
-                #puts hoge.text
-                $hoge = hoge.text
-                $link = ("https://news.google.com" + hoge[:href])
-                $link.slice!("https://news.google.com".length)
-                
-                
-                count += 1
-                if count == 1 then
-                    break
-                end
-            end
-            if count == 1 then
-                break
+client = Slack::Web::Client.new
+loop do
+    if get_contest_plan() then
+    contest_search
+        if $atflg then
+            $atcoder.each do |atlink|        
+                client.chat_postMessage(channel: data['channel'], text: "今日のAtcoderの情報です\n#{atlink}", as_user: true)
+                $atflg = false
+                $atcoder.clear
             end
         end
-        if $link then
-            $flg = true
-        else
-            $flg = false
-        end
-        if $flg then
-            client.message channel: data['channel'], text: "#{$hoge}\n#{$link}"
-        else 
-            client.message channel: data['channel'], text: "ニュースが見つかりませんでした"
-        end
-        $hoge = nil
-        $link = nil
     end
-    
-    
 end
-
-client.start!
