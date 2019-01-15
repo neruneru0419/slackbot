@@ -10,10 +10,12 @@ loop do
     contest_search
         if $atflg then
             $atcoder.each do |atlink|        
-                client.chat_postMessage(channel: data['channel'], text: "今日のAtcoderの情報です\n#{atlink}", as_user: true)
+                client.chat_postMessage(channel: 'botテスト', text: "今日のAtcoderの情報です\n#{atlink}", as_user: true)
                 $atflg = false
                 $atcoder.clear
             end
+        else
+            client.chat_postMessage(channel: 'botテスト', text: "今日はAtcoderは開催されません(テスト)", as_user: true)
         end
     end
 end
