@@ -7,7 +7,7 @@ end
 client = Slack::Web::Client.new
 loop do
     if get_contest_plan() then
-    contest_search
+    contest_search()
         if $atflg then
             $atcoder.each do |atlink|        
                 client.chat_postMessage(channel: 'botテスト', text: "今日のAtcoderの情報です\n#{atlink}", as_user: true)
