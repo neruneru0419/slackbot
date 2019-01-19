@@ -14,8 +14,6 @@ loop do
                 $atflg = false
                 $atcoder.clear
             end
-        else
-            client.chat_postMessage(channel: 'botテスト', text: "今日はAtcoderは開催されません(テスト)", as_user: true)
         end
     end
 end
