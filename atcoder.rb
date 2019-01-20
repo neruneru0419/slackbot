@@ -4,10 +4,10 @@ require "open-uri"
 $timecount = true
 def get_contest_plan 
     todaytime = Time.new
-    if todaytime.hour == 15 and $timecount then
+    if todaytime.hour == 0 and $timecount then
         $timecount = false
         return true
-    elsif todaytime.hour == 15 and !$timecount 
+    elsif todaytime.hour == 0 and !$timecount 
         return false
     else
         $timecount = true 
