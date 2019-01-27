@@ -4,7 +4,9 @@ require './atcoder'
 Slack.configure do |conf|
 conf.token = ENV['SLACK_API_TOKEN']
 end
+
 client = Slack::Web::Client.new
+
 loop do
     if get_contest_plan then
         contest_search
