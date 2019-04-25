@@ -8,6 +8,7 @@ end
 client = Slack::Web::Client.new
 
 loop do
+    client.chat_command(channel:'C8DCH0KA6', command:'/hoge')
     if get_contest_plan then
         contest_search
         if $atflg then
