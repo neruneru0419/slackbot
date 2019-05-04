@@ -6,14 +6,16 @@ Slack.configure do |conf|
 end
 
 client = Slack::Web::Client.new
-
+contest_list = []
 loop do
-    if get_contest_plan and $atflg then
-        contest_search
-        $atcoder.each do |atlink|        
-            client.chat_postMessage(channel: '21_kyopro', text: "今日のAtCoderの情報です\n#{atlink}", as_user: true)
-            $atflg = false
+    if get_contest_plan then
+        contest_list = contest_search
+        if not contest_list.empty? then
+            client.chat_postMessage(channel: '21_kyopro', text: "今日のAtCoderのコンテストです", as_user: true)
+            contest_list.each do |atlink|        
+                client.chat_postMessage(channel: '21_kyopro', text: "#{atlink}", as_user: true)
+            end
+            sleep(3600)
         end
-        $atcoder.clear
     end
 end
