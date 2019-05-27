@@ -83,7 +83,7 @@ def contest_request
         sleep(60)
     end
 
-    if time == 12 and flg then
+    if time == 13 and flg then
         response = HTTP.post("https://slack.com/api/chat.postMessage", params: {
             token: ENV['SLACK_API_TOKEN'],
             text: "今日の1day1commitの問題です\n#{contest_link}",
