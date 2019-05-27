@@ -1,1 +1,1 @@
-bot: ruby koumebot.rb
+bot: ruby main.rb
